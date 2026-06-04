@@ -3,21 +3,22 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Order {
-  id            Int         @id @default(autoincrement())
+  id            Int      @id @default(autoincrement())
   tableNumber   String
   customerName  String
   items         String
   totalAmount   Float
-  status        String      @default("PENDING")
-  estimatedTime Int         @default(15)
-  isManual      Boolean     @default(false)
+  status        String   @default("PENDING")
+  estimatedTime Int      @default(15)
+  isManual      Boolean  @default(false)
   notes         String?
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model Expense {
